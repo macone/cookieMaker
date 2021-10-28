@@ -1,0 +1,16 @@
+{
+  "name": "cookieMaker",
+  "version": "0.0.1",
+  "main": "index.js",
+  "repository": "https://github.com/macone/cookieMaker.git",
+  "author": "Maciej Łukasiak",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^8.1.0"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "express-handlebars": "^5.3.4"
+  }
+}
