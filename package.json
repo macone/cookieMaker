@@ -2,6 +2,9 @@
   "name": "cookieMaker",
   "version": "0.0.1",
   "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js"
+  },
   "repository": "https://github.com/macone/cookieMaker.git",
   "author": "Maciej Łukasiak",
   "license": "MIT",

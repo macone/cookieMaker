@@ -1,0 +1,30 @@
+<div class="container">
+    <h1>Skonfiguruj {{upper "ciasteczko!"}}</h1>
+</div>
+
+<div class="container">
+    <div class="container section">
+        <h2>Wybierz bazę:</h2>
+        {{#each bases}}
+            <button  onclick="location.href='/select-base/{{this.[0]}}'" class="btn btn-secondary"> Ciastko {{this.[0]}}: {{this.[1]}}zł</li></button>
+        {{/each}}
+    </div>
+    <div class="container section">
+        <h2>Wybierz dodatek:</h2>
+        {{#each addons}}
+            <button  onclick="location.href='/views/configurator/add-ons'" class="btn btn-secondary">{{this.[0]}}: {{this.[1]}}zł</li></button>
+        {{/each}}
+    </div>
+    {{#if cookie.base}}
+        <div class="container">
+            {{> cookie-preview }}
+        </div>
+        <div class="container section">
+            {{> addons-list }}
+        </div>
+    {{else}}
+        <div class="container section">
+            <p>Aby zobaczyć podgląd ciastka, wybierz jego bazę.</p>
+        </div>
+    {{/if}}
+</div>
