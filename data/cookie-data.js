@@ -1,14 +1,14 @@
 const COOKIE_BASES = {
-  jasne: 5,
-  ciemne: 5,
+  light: 5,
+  dark: 5,
 };
 
 const COOKIE_ADDONS = {
-  czekolada: 5,
-  posypka: 3,
-  miod: 6,
-  zurawina: 4,
-  kokos: 10,
+  chocolate: 5,
+  sprinkles: 3,
+  honey: 6,
+  cranberries: 4,
+  coconut: 10,
 };
 
 module.exports = {

@@ -1,30 +1,44 @@
-<div class="container">
+<!-- HEADER -->
+
+<div class="container section">
     <h1>Skonfiguruj {{upper "ciasteczko!"}}</h1>
 </div>
 
-<div class="container">
-    <div class="container section">
-        <h2>Wybierz bazę:</h2>
-        {{#each bases}}
-            <button  onclick="location.href='/select-base/{{this.[0]}}'" class="btn btn-secondary"> Ciastko {{this.[0]}}: {{this.[1]}}zł</li></button>
-        {{/each}}
-    </div>
+<!-- BASE -->
+
+<div class="container section">
+    <h2>Wybierz bazę:</h2>
+    {{#each allBases}}
+        {{log this}}
+        <button  onclick="location.href='/configurator/select-base/{{this.[0]}}'" class="btn btn-warning"> Ciastko {{this.[0]}}: {{this.[1]}}zł</button>
+    {{/each}}
+</div>
+
+<!-- ADDONS -->
+
+{{#if cookie.base}}
     <div class="container section">
         <h2>Wybierz dodatek:</h2>
-        {{#each addons}}
-            <button  onclick="location.href='/views/configurator/add-ons'" class="btn btn-secondary">{{this.[0]}}: {{this.[1]}}zł</li></button>
+        {{#each allAddons}}
+            {{#if (isNotOnArray @root.cookie.addons this.[0])}}
+                <button  onclick="location.href='/configurator/select-addon/{{this.[0]}}'" class="btn btn-warning">{{this.[0]}}: {{this.[1]}}zł</button>
+            {{/if}}
         {{/each}}
     </div>
-    {{#if cookie.base}}
-        <div class="container">
-            {{> cookie-preview }}
-        </div>
-        <div class="container section">
-            {{> addons-list }}
-        </div>
-    {{else}}
-        <div class="container section">
-            <p>Aby zobaczyć podgląd ciastka, wybierz jego bazę.</p>
-        </div>
-    {{/if}}
-</div>
+{{/if}}
+
+<!-- COOKIE LIST -->
+
+{{#if cookie.base}}
+    <div class="container section">
+        {{> cookie-preview }}
+    </div>
+    <div class="container section">
+        {{> addons-list deleteBtn=true}}
+        <button  onclick="location.href='/order/summary'" class="btn btn-warning btn-lg">Zamów!</button>
+    </div>
+{{else}}
+    <div class="container section">
+        <p>Aby zobaczyć podgląd ciastka, wybierz jego bazę.</p>
+    </div>
+{{/if}}

@@ -1,4 +1,18 @@
-<h3>Wybrane ciastko:</h3>
-<ul>
-    <li>Baza: {{cookie.base}} - {{find-price bases cookie.base}}</li>
-</ul>
+<section class="summary">
+    <h3>Wybrane ciastko:</h3>
+    <ul>
+        <li>{{cookie.base}} - {{pricify (findPrice allBases cookie.base)}}zł</li>
+    </ul>
+
+    <h3>Wybrane dodatki:</h3>
+    <ul>
+        {{#each cookie.addons}}
+        <li>{{this}} {{pricify (findPrice @root.allAddons this)}}zł
+            {{#if ../deleteBtn}}
+                <a href="/configurator/delete-addon/{{this}}">usuń</a></li>
+            {{/if}}
+        {{/each}}
+    </ul>
+    {{log sum}}
+    <p><strong>łączna cena: {{pricify sum}}PLN</strong></p>
+</section>
