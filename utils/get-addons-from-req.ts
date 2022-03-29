@@ -1,8 +1,6 @@
-const getAddonsFromReq = (req) => {
-  const { cookieAddons } = req.cookies;
-  return cookieAddons ? JSON.parse(cookieAddons) : [];
-};
+import {Request} from "express";
 
-module.exports = {
-  getAddonsFromReq,
-};
+export const getAddonsFromReq = (req: Request) => {
+  const {cookieAddons} = req.cookies;
+  return cookieAddons ? JSON.parse(cookieAddons) : [];
+}

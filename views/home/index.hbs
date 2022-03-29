@@ -9,8 +9,7 @@
 <div class="container section">
     <h2>Wybierz bazę:</h2>
     {{#each allBases}}
-        {{log this}}
-        <button  onclick="location.href='/configurator/select-base/{{this.[0]}}'" class="btn btn-warning"> Ciastko {{this.[0]}}: {{this.[1]}}zł</button>
+        <button  onclick="location.href='/select-base/{{this.[0]}}'" class="btn btn-warning"> Ciastko {{this.[0]}}: {{this.[1]}}zł</li></button>
     {{/each}}
 </div>
 
@@ -21,7 +20,7 @@
         <h2>Wybierz dodatek:</h2>
         {{#each allAddons}}
             {{#if (isNotOnArray @root.cookie.addons this.[0])}}
-                <button  onclick="location.href='/configurator/select-addon/{{this.[0]}}'" class="btn btn-warning">{{this.[0]}}: {{this.[1]}}zł</button>
+                <button  onclick="location.href='/select-addon/{{this.[0]}}'" class="btn btn-warning">{{this.[0]}}: {{this.[1]}}zł</li></button>
             {{/if}}
         {{/each}}
     </div>
@@ -35,7 +34,7 @@
     </div>
     <div class="container section">
         {{> addons-list deleteBtn=true}}
-        <button  onclick="location.href='/order/summary'" class="btn btn-warning btn-lg">Zamów!</button>
+        <button  onclick="location.href='/order/summary'" class="btn btn-warning btn-lg">Zamów!</li></button>
     </div>
 {{else}}
     <div class="container section">

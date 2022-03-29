@@ -1,36 +1,48 @@
-const express = require('express');
-const { getCookieSettings } = require('../utils/get-cookie-settings');
+import {Request, Response, Router} from "express";
+import {CookieMakerApp} from "../index";
+import {MyRouter} from "../types/my-router";
 
-const orderRouter = express.Router();
 
-orderRouter
-  .get('/summary', (req, res) => {
-    const {
-      base, addons, sum, allAddons, allBases,
-    } = getCookieSettings(req);
-    res.render('order/summary', {
-      cookie: {
-        base,
-        addons,
-      },
-      allBases,
-      allAddons,
-      sum,
-    });
-  })
+export class OrderRouter implements MyRouter {
+    public readonly router: Router = Router();
+    public readonly urlPrefix: string = '/';
 
-  .get('/thanks', ((req, res) => {
-    const { sum, addons, cookieBase } = getCookieSettings(req);
-    res
-      .clearCookie('cookieBase')
-      .clearCookie('cookieAddons')
-      .render('order/thanks', {
-        cookieBase,
-        addons,
-        sum,
-      });
-  }));
+    constructor(
+        private cmapp: CookieMakerApp,
+    ) {
+        this.cmapp = cmapp;
+        this.router = Router();
+        this.setUpRoutes();
+    }
 
-module.exports = {
-  orderRouter,
-};
+    private setUpRoutes(): void {
+        this.router.get('/order/summary', this.summary);
+        this.router.get('/order/thanks', this.thanks);
+    }
+
+    private summary = (req: Request, res: Response) => {
+        const {sum, addons, base, allBases, allAddons} = this.cmapp.getCookieSettings(req);
+
+        res.render('order/summary', {
+            cookie: {
+                base,
+                addons,
+            },
+            allBases,
+            allAddons,
+            sum,
+        });
+    };
+
+    private thanks = (req: Request, res: Response) => {
+        const {sum} = this.cmapp.getCookieSettings(req);
+
+        res
+            .clearCookie('cookieBase')
+            .clearCookie('cookieAddons')
+            .render('order/thanks', {
+                sum,
+            });
+    }
+
+}
